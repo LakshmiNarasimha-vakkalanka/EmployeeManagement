@@ -38,6 +38,13 @@ namespace EmployeeManagement
             this.datepicketDOB = new System.Windows.Forms.DateTimePicker();
             this.cmbDept = new System.Windows.Forms.ComboBox();
             this.btnSave = new System.Windows.Forms.Button();
+            this.dgvEmployees = new System.Windows.Forms.DataGridView();
+            this.txtempsearch = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtdeptsearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -120,11 +127,69 @@ namespace EmployeeManagement
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // dgvEmployees
+            // 
+            this.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEmployees.Location = new System.Drawing.Point(30, 361);
+            this.dgvEmployees.Name = "dgvEmployees";
+            this.dgvEmployees.RowHeadersWidth = 51;
+            this.dgvEmployees.RowTemplate.Height = 24;
+            this.dgvEmployees.Size = new System.Drawing.Size(717, 218);
+            this.dgvEmployees.TabIndex = 11;
+            // 
+            // txtempsearch
+            // 
+            this.txtempsearch.Location = new System.Drawing.Point(170, 322);
+            this.txtempsearch.Name = "txtempsearch";
+            this.txtempsearch.Size = new System.Drawing.Size(100, 22);
+            this.txtempsearch.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(100, 327);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(36, 17);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Emp";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(408, 329);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 17);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Dept";
+            // 
+            // txtdeptsearch
+            // 
+            this.txtdeptsearch.Location = new System.Drawing.Point(478, 324);
+            this.txtdeptsearch.Name = "txtdeptsearch";
+            this.txtdeptsearch.Size = new System.Drawing.Size(100, 22);
+            this.txtdeptsearch.TabIndex = 14;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(697, 327);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 16;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1099, 691);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.txtdeptsearch);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtempsearch);
+            this.Controls.Add(this.dgvEmployees);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.cmbDept);
             this.Controls.Add(this.datepicketDOB);
@@ -136,6 +201,8 @@ namespace EmployeeManagement
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,6 +219,12 @@ namespace EmployeeManagement
         private System.Windows.Forms.DateTimePicker datepicketDOB;
         private System.Windows.Forms.ComboBox cmbDept;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.DataGridView dgvEmployees;
+        private System.Windows.Forms.TextBox txtempsearch;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtdeptsearch;
+        private System.Windows.Forms.Button btnSearch;
     }
 }
 

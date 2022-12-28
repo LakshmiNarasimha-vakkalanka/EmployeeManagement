@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -33,8 +34,56 @@ namespace EmployeeManagement
                     npgsqlConnection.Open();
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Employee data inserted successfully...");
+                    BindGrid();
                 }
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            BindGrid();
+        }
+
+        private void BindGrid()
+        {
+            DataTable dtEmployees = GetEmployeesByNamdAndDept(txtempsearch.Text, txtdeptsearch.Text);
+            dgvEmployees.DataSource = dtEmployees;
+        }
+
+        private DataTable GetEmployeesByNamdAndDept(string Name, string Department)
+        {
+            DataTable dtEmployees = new DataTable();
+            string pgsqlConnection = System.Configuration.ConfigurationManager.ConnectionStrings["Postgresql"].ToString();
+            using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(pgsqlConnection))
+            {
+                using (NpgsqlCommand cmd = new NpgsqlCommand(@"SELECT * FROM fn_get_employees
+                                                                    ( 
+                                                                        :p_empname,
+                                                                        :p_empdept
+                                                                    )", npgsqlConnection))
+                {
+                    cmd.CommandType = CommandType.Text; //
+                    if (!String.IsNullOrEmpty(Name))
+                        cmd.Parameters.AddWithValue("p_empname", DbType.String).Value = Name;
+                    else
+                        cmd.Parameters.AddWithValue("p_empname", DbType.String).Value = DBNull.Value;
+
+                    if(!String.IsNullOrEmpty(Department))
+                        cmd.Parameters.AddWithValue("p_empdept", DbType.String).Value = Department;
+                    else
+                        cmd.Parameters.AddWithValue("p_empdept", DbType.String).Value = DBNull.Value;
+                    npgsqlConnection.Open();
+
+                    NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(cmd);                    
+                    dataAdapter.Fill(dtEmployees);
+                }
+            }
+            return dtEmployees;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            BindGrid();
         }
     }
 }

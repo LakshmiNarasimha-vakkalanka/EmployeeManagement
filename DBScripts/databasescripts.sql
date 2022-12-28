@@ -36,3 +36,32 @@ BEGIN
 end;
 $BODY$;
 ------------------------------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.fn_get_employees
+(
+	p_empname character varying DEFAULT NULL::character varying,
+	p_empdept character varying DEFAULT NULL::character varying
+)
+    RETURNS TABLE
+	(empname character varying, 
+	 empdept character varying, 
+	 empsalary money, 
+	 empdob timestamp without time zone
+	) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+
+begin
+
+	return query
+	SELECT emp.empname, emp.empdept, emp.empsalary, emp.empdob
+	FROM public.testemployee emp where 
+	(lower(emp.empname) = lower(p_empname) or p_empname is null) and
+    (lower(emp.empdept) = lower(p_empdept) or p_empdept is null);
+	
+end;
+$BODY$;
